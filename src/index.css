@@ -1,0 +1,36 @@
+/* Importación principal de Tailwind CSS */
+@import "tailwindcss";
+
+/* Variante dark basada en clase .dark */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Navegación suave entre secciones */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base general del sitio */
+body {
+  background-color: #020617;
+}
+
+/* Contenedor principal de React */
+#root {
+  min-height: 100vh;
+}
+
+/* Imágenes responsivas por defecto */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Foco accesible para navegación con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 4px;
+}
