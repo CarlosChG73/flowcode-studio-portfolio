@@ -1,32 +1,74 @@
 // Estado de React
 import { useState } from 'react'
 
+// Herramientas de React Router
+import { useLocation, useNavigate } from 'react-router-dom'
+
 // Hook de tema
 import useTheme from '../../hooks/useTheme'
 
 // Enlaces principales de navegación
 const navLinks = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Sobre mí', href: '#sobre-mi' },
-  { label: 'Áreas técnicas', href: '#tecnologias' },
-  { label: 'Formación', href: '#experiencia' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Inicio', sectionId: 'inicio' },
+  { label: 'Sobre mí', sectionId: 'sobre-mi' },
+  { label: 'Áreas técnicas', sectionId: 'tecnologias' },
+  { label: 'Formación', sectionId: 'experiencia' },
+  { label: 'Proyectos', sectionId: 'proyectos' },
+  { label: 'Contacto', sectionId: 'contacto' },
 ]
 
 // Componente de navegación principal
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   // Abre o cierra el menú móvil
   const handleToggleMenu = () => {
     setIsOpen((currentState) => !currentState)
   }
 
-  // Cierra el menú móvil al seleccionar una opción
+  // Cierra el menú móvil
   const handleCloseMenu = () => {
     setIsOpen(false)
+  }
+
+  // Hace scroll considerando la altura del navbar fijo
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId)
+    const navbar = document.querySelector('header')
+
+    if (!section) return
+
+    const navbarHeight = navbar?.offsetHeight || 80
+    const sectionPosition =
+      section.getBoundingClientRect().top + window.scrollY - navbarHeight
+
+    window.scrollTo({
+      top: sectionPosition,
+      behavior: 'smooth',
+    })
+
+    window.history.replaceState(null, '', `/#${sectionId}`)
+  }
+
+  // Navega hacia una sección del portafolio sin recargar la aplicación
+  const handleNavigateToSection = (event, sectionId) => {
+    event.preventDefault()
+    handleCloseMenu()
+
+    if (location.pathname !== '/') {
+      navigate('/')
+
+      window.setTimeout(() => {
+        scrollToSection(sectionId)
+      }, 150)
+
+      return
+    }
+
+    scrollToSection(sectionId)
   }
 
   const isDarkMode = theme === 'dark'
@@ -37,9 +79,9 @@ function Navbar() {
         <div className="flex min-h-20 items-center justify-between">
           {/* Marca principal */}
           <a
-            href="#inicio"
+            href="/#inicio"
             className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-600 transition hover:text-cyan-500 sm:text-sm dark:text-cyan-400 dark:hover:text-cyan-300"
-            onClick={handleCloseMenu}
+            onClick={(event) => handleNavigateToSection(event, 'inicio')}
           >
             Flowcode Studio
           </a>
@@ -47,10 +89,13 @@ function Navbar() {
           {/* Menú de escritorio */}
           <ul className="hidden items-center gap-6 text-sm text-slate-600 lg:flex dark:text-slate-300">
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li key={link.sectionId}>
                 <a
                   className="transition hover:text-cyan-600 dark:hover:text-cyan-400"
-                  href={link.href}
+                  href={`/#${link.sectionId}`}
+                  onClick={(event) =>
+                    handleNavigateToSection(event, link.sectionId)
+                  }
                 >
                   {link.label}
                 </a>
@@ -122,11 +167,13 @@ function Navbar() {
         >
           <ul className="flex flex-col gap-2 text-sm text-slate-600 dark:text-slate-300">
             {navLinks.map((link) => (
-              <li key={link.href}>
+              <li key={link.sectionId}>
                 <a
-                  href={link.href}
+                  href={`/#${link.sectionId}`}
                   className="block rounded-lg px-3 py-3 transition hover:bg-slate-100 hover:text-cyan-600 dark:hover:bg-white/5 dark:hover:text-cyan-400"
-                  onClick={handleCloseMenu}
+                  onClick={(event) =>
+                    handleNavigateToSection(event, link.sectionId)
+                  }
                 >
                   {link.label}
                 </a>
