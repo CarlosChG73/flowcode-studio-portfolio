@@ -8,9 +8,9 @@ import useTheme from '../../hooks/useTheme'
 const navLinks = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Áreas técnicas', href: '#tecnologias' },
+  { label: 'Formación', href: '#experiencia' },
   { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Tecnologías', href: '#tecnologias' },
-  { label: 'Experiencia', href: '#experiencia' },
   { label: 'Contacto', href: '#contacto' },
 ]
 

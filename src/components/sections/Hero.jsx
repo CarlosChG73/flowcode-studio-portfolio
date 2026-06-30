@@ -2,7 +2,7 @@
 import Button from '../ui/Button'
 
 // Assets del Hero
-import heroImage from '../../assets/images/hero-flowcode-studio.png'
+import heroImage from '../../assets/images/hero-flowcode-studio.webp'
 import logoImage from '../../assets/logos/logo-ccg.png'
 
 // Componente principal del Hero
@@ -12,13 +12,13 @@ function Hero() {
       id="inicio"
       className="relative scroll-mt-24 overflow-hidden border-b border-white/10"
     >
-      {/* Imagen de fondo */}
+      {/* Imagen de fondo optimizada */}
       <img
         src={heroImage}
         alt="Espacio de trabajo tecnológico con monitores y código"
         title="Imagen de portada de Flowcode Studio"
-        width="1920"
-        height="1080"
+        width="1600"
+        height="900"
         className="absolute inset-0 h-full w-full object-cover object-center"
         decoding="async"
       />
@@ -52,25 +52,27 @@ function Hero() {
           Carlos Chávez
         </h1>
 
-        {/* Rol profesional temporal */}
+        {/* Formación profesional */}
         <p className="mt-4 text-base font-medium text-slate-200 sm:text-lg">
-          Desarrollador de Software
+          Ingeniero en Sistemas Computacionales
+        </p>
+
+        {/* Áreas de enfoque */}
+        <p className="mt-3 text-sm font-semibold text-cyan-200 sm:text-base">
+          Desarrollo de software · Soluciones digitales · Soporte tecnológico
         </p>
 
         {/* Descripción principal */}
         <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
-          Desarrollo interfaces web modernas, responsivas y organizadas con React,
-          JavaScript y Tailwind CSS.
+          Ingeniero en Sistemas Computacionales orientado al desarrollo de
+          software, soporte tecnológico y creación de soluciones digitales
+          funcionales, organizadas y adaptables.
         </p>
 
-        {/* Acciones principales */}
-        <div className="mt-7 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
-          <Button href="#proyectos" variant="primary">
-            Ver proyectos
-          </Button>
-
-          <Button href="#contacto" variant="secondary">
-            Contactar
+        {/* Acción principal */}
+        <div className="mt-7 flex w-full max-w-xs justify-center">
+          <Button href="#sobre-mi" variant="primary">
+            Conocer mi perfil
           </Button>
         </div>
       </div>

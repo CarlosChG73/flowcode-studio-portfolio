@@ -4,6 +4,8 @@ import logoImage from '../../assets/logos/logo-ccg.png'
 // Enlaces rápidos del footer
 const footerLinks = [
   { label: 'Inicio', href: '#inicio' },
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Áreas técnicas', href: '#tecnologias' },
   { label: 'Proyectos', href: '#proyectos' },
   { label: 'Contacto', href: '#contacto' },
 ]
@@ -34,7 +36,7 @@ function Footer() {
               </p>
 
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-                Portafolio profesional de Carlos Chávez.
+                Desarrollo de software, soluciones digitales y soporte tecnológico.
               </p>
             </div>
           </div>
@@ -57,9 +59,9 @@ function Footer() {
         </div>
 
         {/* Línea inferior */}
-        <div className="mt-6 flex flex-col gap-2 border-t border-slate-200 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:border-white/10">
+        <div className="mt-6 flex flex-col items-center gap-2 border-t border-slate-200 pt-5 text-center text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:text-left dark:border-white/10">
           <p>© 2026 Flowcode Studio by Carlos Chávez.</p>
-          <p>React · Vite · Tailwind CSS</p>
+          <p>React · Vite · Tailwind CSS · Backend serverless</p>
         </div>
       </div>
     </footer>

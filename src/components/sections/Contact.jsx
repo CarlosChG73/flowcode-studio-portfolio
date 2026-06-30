@@ -1,74 +1,96 @@
 // Estado de React
-import { useState } from 'react'
+import { useState } from "react";
+
+// Íconos de enlaces profesionales
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 
 // Componentes UI
-import Button from '../ui/Button'
-import Card from '../ui/Card'
+import Button from "../ui/Button";
+import Card from "../ui/Card";
+
+// Enlaces profesionales
+const professionalLinks = [
+  {
+    id: "github",
+    label: "GitHub",
+    href: "https://github.com/CarlosChG73",
+    icon: SiGithub,
+    color: "#8B949E",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/carloschavezg73",
+    icon: FaLinkedin,
+    color: "#0A66C2",
+  },
+];
 
 // Estado inicial del formulario
 const initialFormState = {
-  name: '',
-  email: '',
-  message: '',
-  company: '',
-}
+  name: "",
+  email: "",
+  message: "",
+  company: "",
+};
 
 // Sección de contacto
 function Contact() {
-  const [formData, setFormData] = useState(initialFormState)
+  const [formData, setFormData] = useState(initialFormState);
   const [formStatus, setFormStatus] = useState({
-    type: '',
-    message: '',
-  })
-  const [isSending, setIsSending] = useState(false)
+    type: "",
+    message: "",
+  });
+  const [isSending, setIsSending] = useState(false);
 
   // Actualiza los campos del formulario
   const handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setFormData((currentData) => ({
       ...currentData,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   // Envía el formulario al backend
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    setIsSending(true)
-    setFormStatus({ type: '', message: '' })
+    event.preventDefault();
+    setIsSending(true);
+    setFormStatus({ type: "", message: "" });
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'No se pudo enviar el mensaje.')
+        throw new Error(data.message || "No se pudo enviar el mensaje.");
       }
 
       setFormStatus({
-        type: 'success',
-        message: data.message || 'Mensaje enviado correctamente.',
-      })
+        type: "success",
+        message: data.message || "Mensaje enviado correctamente.",
+      });
 
-      setFormData(initialFormState)
+      setFormData(initialFormState);
     } catch (error) {
       setFormStatus({
-        type: 'error',
+        type: "error",
         message:
-          error.message || 'No se pudo enviar el mensaje. Intenta nuevamente.',
-      })
+          error.message || "No se pudo enviar el mensaje. Intenta nuevamente.",
+      });
     } finally {
-      setIsSending(false)
+      setIsSending(false);
     }
-  }
+  };
 
   return (
     <section
@@ -83,34 +105,45 @@ function Contact() {
           </p>
 
           <h2 className="text-3xl font-bold text-slate-950 sm:text-4xl lg:text-5xl dark:text-white">
-            Hablemos de proyectos
+            Contacto profesional
           </h2>
 
           <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
-            Puedes enviarme un mensaje mediante el formulario. También puedes revisar
-            mi trabajo y perfil profesional en GitHub y LinkedIn.
+            Este espacio está disponible para oportunidades profesionales,
+            colaboración en proyectos o solicitudes de información adicional
+            sobre mi perfil.
+          </p>
+
+          <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+            Por seguridad, el CV completo y los datos personales se comparten
+            únicamente mediante solicitud directa.
           </p>
         </div>
 
         {/* Enlaces profesionales */}
         <div className="mb-7 flex flex-col justify-center gap-3 sm:flex-row">
-          <Button
-            href="https://github.com/"
-            variant="ghost"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </Button>
+          {professionalLinks.map((link) => {
+            const Icon = link.icon;
 
-          <Button
-            href="https://www.linkedin.com/"
-            variant="ghost"
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </Button>
+            return (
+              <Button
+                key={link.id}
+                href={link.href}
+                variant="ghost"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Icon
+                    className="h-4 w-4"
+                    style={{ color: link.color }}
+                    aria-hidden="true"
+                  />
+                  {link.label}
+                </span>
+              </Button>
+            );
+          })}
         </div>
 
         {/* Formulario de contacto */}
@@ -178,9 +211,9 @@ function Contact() {
           {formStatus.message && (
             <p
               className={`mt-5 rounded-xl px-4 py-3 text-sm ${
-                formStatus.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300'
-                  : 'bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-300'
+                formStatus.type === "success"
+                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300"
+                  : "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-300"
               }`}
             >
               {formStatus.message}
@@ -194,12 +227,12 @@ function Contact() {
             className="mt-6 w-full disabled:cursor-not-allowed disabled:opacity-60"
             disabled={isSending}
           >
-            {isSending ? 'Enviando...' : 'Enviar mensaje'}
+            {isSending ? "Enviando..." : "Enviar mensaje"}
           </Button>
         </Card>
       </div>
     </section>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

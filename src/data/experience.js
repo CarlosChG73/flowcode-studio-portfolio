@@ -1,24 +1,24 @@
-// Datos temporales de experiencia y formación
+// Datos de formación académica y perfil profesional
 export const experience = [
-  {
-    id: 'software-development',
-    title: 'Desarrollo de software',
-    period: 'En formación continua',
-    description:
-      'Construcción de proyectos web con enfoque en interfaces responsivas, código limpio y buenas prácticas.',
-  },
   {
     id: 'systems-engineering',
     title: 'Ingeniería en Sistemas Computacionales',
     period: 'Formación académica',
     description:
-      'Base profesional en análisis, desarrollo de software, documentación técnica y solución de problemas.',
+      'Egresado de la Universidad Virtual del Estado de Guanajuato (UVEG), con formación universitaria en desarrollo de software, sistemas computacionales, bases de datos, redes y tecnologías de información.',
   },
   {
-    id: 'personal-projects',
-    title: 'Proyectos personales',
-    period: 'Portafolio profesional',
+    id: 'mobile-programming',
+    title: 'Especialidad académica en programación móvil',
+    period: 'Área de especialidad',
     description:
-      'Desarrollo de aplicaciones web para demostrar habilidades técnicas, organización y capacidad de aprendizaje.',
+      'Formación orientada a conceptos, metodologías, herramientas y lenguajes relacionados con el desarrollo de aplicaciones móviles dentro del plan académico.',
+  },
+  {
+    id: 'professional-focus',
+    title: 'Desarrollo de soluciones tecnológicas',
+    period: 'Orientación profesional',
+    description:
+      'Orientación profesional hacia la creación de soluciones digitales funcionales, con atención a la estructura, la documentación, la calidad del código y la mejora de procesos tecnológicos.',
   },
 ]
