@@ -18,8 +18,10 @@ export const projects = [
       'Git',
     ],
     path: '/proyectos/portfolio-react',
-    demoUrl: '',
-    repositoryUrl: '',
+    demoUrl:
+      'https://flowcode-studio-portfolio-1uh70dx8q-flowcode-studio.vercel.app',
+    repositoryUrl:
+      'https://github.com/CarlosChG73/flowcode-studio-portfolio',
     summary:
       'Flowcode Studio Portfolio es una aplicación web profesional desarrollada para presentar perfil, formación académica, áreas técnicas, proyectos y contacto mediante una interfaz clara, responsiva y estructurada.',
     objective:
