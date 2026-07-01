@@ -109,14 +109,15 @@ function Contact() {
           </h2>
 
           <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
-            Este espacio está disponible para oportunidades profesionales,
-            colaboración en proyectos o solicitudes de información adicional
-            sobre mi perfil.
+            Este apartado está destinado a la comunicación profesional
+            relacionada con oportunidades laborales, colaboración en proyectos o
+            solicitudes de información adicional sobre el perfil presentado.
           </p>
 
           <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
-            Por seguridad, el CV completo y los datos personales se comparten
-            únicamente mediante solicitud directa.
+            El CV completo y los datos de contacto complementarios se encuentran
+            disponibles para procesos profesionales que requieran información
+            adicional.
           </p>
         </div>
 
@@ -148,6 +149,13 @@ function Contact() {
 
         {/* Formulario de contacto */}
         <Card as="form" className="sm:p-8" onSubmit={handleSubmit}>
+          {/* Encabezado del formulario */}
+          <div className="mb-6 text-center">
+            <h3 className="text-xl font-semibold text-slate-950 dark:text-white">
+              Formulario de contacto
+            </h3>
+          </div>
+
           {/* Campo oculto antispam */}
           <input
             type="text"

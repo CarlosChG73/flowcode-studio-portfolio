@@ -19,21 +19,21 @@ function Experience() {
           </p>
 
           <h2 className="text-3xl font-bold text-slate-950 sm:text-4xl dark:text-white">
-            Formación académica y perfil profesional
+            Formación académica y desarrollo profesional
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base dark:text-slate-300">
-            Formación universitaria, orientación profesional y áreas de aplicación
-            vinculadas al desarrollo de software y soluciones tecnológicas.
+            Formación universitaria en sistemas computacionales y desarrollo
+            profesional orientado a la creación de soluciones digitales.
           </p>
         </div>
 
         {/* Lista de formación */}
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-2">
           {experience.map((item) => (
             <Card key={item.id} className="sm:p-6">
               {/* Categoría */}
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
                 {item.period}
               </p>
 
@@ -43,7 +43,7 @@ function Experience() {
               </h3>
 
               {/* Descripción */}
-              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+              <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
                 {item.description}
               </p>
             </Card>

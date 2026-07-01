@@ -1,6 +1,3 @@
-// Componente UI
-import Button from '../ui/Button'
-
 // Assets del Hero
 import heroImage from '../../assets/images/hero-flowcode-studio.webp'
 import logoImage from '../../assets/logos/logo-ccg.png'
@@ -68,13 +65,6 @@ function Hero() {
           software, soporte tecnológico y creación de soluciones digitales
           funcionales, organizadas y adaptables.
         </p>
-
-        {/* Acción principal */}
-        <div className="mt-7 flex w-full max-w-xs justify-center">
-          <Button href="#sobre-mi" variant="primary">
-            Conocer mi perfil
-          </Button>
-        </div>
       </div>
     </section>
   )

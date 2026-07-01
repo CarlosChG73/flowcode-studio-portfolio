@@ -23,8 +23,8 @@ function Skills() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base dark:text-slate-300">
-            Conocimientos, herramientas y prácticas aplicadas al desarrollo de software,
-            soporte tecnológico, documentación y organización de soluciones digitales.
+            Conocimientos y herramientas aplicadas al desarrollo de interfaces,
+            organización de proyectos, consumo de APIs y gestión de datos.
           </p>
         </div>
 
