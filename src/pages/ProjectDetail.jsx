@@ -26,6 +26,13 @@ import { TbApi } from 'react-icons/tb'
 // Datos de proyectos
 import { projects } from '../data/projects'
 
+// Imágenes optimizadas del proyecto Flowcode Studio Portfolio
+import portfolioHomeDesktop from '../assets/images/projects/portfolio/portfolio-home-desktop.webp'
+import portfolioResponsiveMockup from '../assets/images/projects/portfolio/portfolio-responsive-mockup.webp'
+import portfolioLightDarkMode from '../assets/images/projects/portfolio/portfolio-light-dark-mode.webp'
+import portfolioContactForm from '../assets/images/projects/portfolio/portfolio-contact-form.webp'
+import portfolioImageOptimization from '../assets/images/projects/portfolio/portfolio-image-optimization.webp'
+
 // Íconos asociados al stack de proyectos
 const stackIcons = {
   React: {
@@ -82,10 +89,47 @@ const stackIcons = {
 const projectDetailLinks = [
   { label: 'Resumen', sectionId: 'project-summary' },
   { label: 'Objetivo', sectionId: 'project-objective' },
+  { label: 'Evidencia visual', sectionId: 'project-visual-evidence' },
   { label: 'Características', sectionId: 'project-features' },
   { label: 'Decisiones técnicas', sectionId: 'project-decisions' },
   { label: 'Resultado', sectionId: 'project-result' },
   { label: 'Enlaces', sectionId: 'project-links' },
+]
+
+// Evidencia visual del proyecto
+const portfolioVisualEvidence = [
+  {
+    id: 'responsive',
+    title: 'Diseño responsivo',
+    description:
+      'Vista adaptada para escritorio y móvil, manteniendo una presentación clara, consistente y profesional.',
+    image: portfolioResponsiveMockup,
+    alt: 'Mockup responsivo del portafolio Flowcode Studio en escritorio y móvil',
+  },
+  {
+    id: 'theme',
+    title: 'Modo claro y oscuro',
+    description:
+      'Interfaz preparada para alternar entre modo claro y oscuro según la preferencia visual del usuario.',
+    image: portfolioLightDarkMode,
+    alt: 'Comparación visual del portafolio en modo claro y modo oscuro',
+  },
+  {
+    id: 'contact',
+    title: 'Formulario de contacto',
+    description:
+      'Formulario profesional conectado a backend serverless para el envío seguro de mensajes.',
+    image: portfolioContactForm,
+    alt: 'Mockup del formulario de contacto del portafolio Flowcode Studio',
+  },
+  {
+    id: 'optimization',
+    title: 'Optimización de imágenes',
+    description:
+      'Optimización de recursos visuales para reducir peso de carga y mejorar el rendimiento del sitio.',
+    image: portfolioImageOptimization,
+    alt: 'Comparativa visual de optimización de imagen principal en formato WebP',
+  },
 ]
 
 // Página de detalle de proyecto
@@ -143,6 +187,8 @@ function ProjectDetail() {
     )
   }
 
+  const isPortfolioProject = project.id === 'portfolio-react'
+
   return (
     <section className="px-5 py-14 sm:px-6 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-6xl">
@@ -191,9 +237,30 @@ function ProjectDetail() {
           </div>
         </div>
 
+        {/* Imagen principal del proyecto */}
+        {isPortfolioProject && (
+          <figure className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg shadow-slate-200/60 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
+            <img
+              src={portfolioHomeDesktop}
+              alt="Vista principal del proyecto Flowcode Studio Portfolio en escritorio"
+              title="Vista principal de Flowcode Studio Portfolio"
+              width="1280"
+              height="720"
+              className="w-full rounded-xl object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <figcaption className="px-2 py-4 text-center text-sm leading-6 text-slate-600 dark:text-slate-300">
+              Vista general del portafolio profesional desarrollado con enfoque
+              responsivo, estructura organizada y presentación visual clara.
+            </figcaption>
+          </figure>
+        )}
+
         {/* Menú interno del proyecto */}
         <nav
-          className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-3 shadow-lg shadow-slate-200/60 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+          className="mx-auto mt-8 max-w-5xl rounded-2xl border border-slate-200 bg-white p-3 shadow-lg shadow-slate-200/60 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
           aria-label="Navegación interna del proyecto"
         >
           <div className="flex flex-wrap justify-center gap-2">
@@ -248,6 +315,58 @@ function ProjectDetail() {
             </p>
           </article>
         </div>
+
+        {/* Evidencia visual del proyecto */}
+        {isPortfolioProject && (
+          <article
+            id="project-visual-evidence"
+            className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+              Evidencia visual
+            </p>
+
+            <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+              Vistas representativas del proyecto
+            </h2>
+
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-slate-300">
+              Estas vistas muestran partes clave del portafolio: adaptación
+              responsiva, soporte de tema visual, formulario de contacto y
+              optimización de recursos.
+            </p>
+
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {portfolioVisualEvidence.map((item) => (
+                <figure
+                  key={item.id}
+                  className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-slate-900"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    title={item.title}
+                    width="1024"
+                    height="768"
+                    className="aspect-4/3 w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+
+                  <figcaption className="p-4">
+                    <h3 className="text-base font-semibold text-slate-950 dark:text-white">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {item.description}
+                    </p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </article>
+        )}
 
         {/* Características principales */}
         <article
