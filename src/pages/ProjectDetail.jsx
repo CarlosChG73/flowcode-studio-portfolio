@@ -78,6 +78,16 @@ const stackIcons = {
   },
 }
 
+// Navegación interna de la ficha técnica
+const projectDetailLinks = [
+  { label: 'Resumen', sectionId: 'project-summary' },
+  { label: 'Objetivo', sectionId: 'project-objective' },
+  { label: 'Características', sectionId: 'project-features' },
+  { label: 'Decisiones técnicas', sectionId: 'project-decisions' },
+  { label: 'Resultado', sectionId: 'project-result' },
+  { label: 'Enlaces', sectionId: 'project-links' },
+]
+
 // Página de detalle de proyecto
 function ProjectDetail() {
   const { projectId } = useParams()
@@ -89,6 +99,23 @@ function ProjectDetail() {
 
   // Busca el proyecto según la ruta
   const project = projects.find((item) => item.id === projectId)
+
+  // Hace scroll interno considerando la altura del navbar principal
+  const handleProjectSectionScroll = (sectionId) => {
+    const section = document.getElementById(sectionId)
+    const navbar = document.querySelector('header')
+
+    if (!section) return
+
+    const navbarHeight = navbar?.offsetHeight || 80
+    const sectionPosition =
+      section.getBoundingClientRect().top + window.scrollY - navbarHeight - 16
+
+    window.scrollTo({
+      top: sectionPosition,
+      behavior: 'smooth',
+    })
+  }
 
   if (!project) {
     return (
@@ -162,9 +189,162 @@ function ProjectDetail() {
               })}
             </div>
           </div>
+        </div>
 
-          {/* Enlaces del proyecto */}
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        {/* Menú interno del proyecto */}
+        <nav
+          className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-3 shadow-lg shadow-slate-200/60 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+          aria-label="Navegación interna del proyecto"
+        >
+          <div className="flex flex-wrap justify-center gap-2">
+            {projectDetailLinks.map((link) => (
+              <button
+                key={link.sectionId}
+                type="button"
+                className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:border-cyan-500/60 hover:text-cyan-700 dark:border-white/10 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-cyan-400/60 dark:hover:text-cyan-300"
+                onClick={() => handleProjectSectionScroll(link.sectionId)}
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Contenido técnico del proyecto */}
+        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          {/* Resumen */}
+          <article
+            id="project-summary"
+            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+              Resumen
+            </p>
+
+            <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+              Descripción del proyecto
+            </h2>
+
+            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+              {project.summary}
+            </p>
+          </article>
+
+          {/* Objetivo */}
+          <article
+            id="project-objective"
+            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+              Objetivo
+            </p>
+
+            <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+              Propósito del desarrollo
+            </h2>
+
+            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+              {project.objective}
+            </p>
+          </article>
+        </div>
+
+        {/* Características principales */}
+        <article
+          id="project-features"
+          className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+            Características principales
+          </p>
+
+          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+            Funcionalidades y elementos desarrollados
+          </h2>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {project.features.map((feature) => (
+              <div
+                key={feature}
+                className="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-900"
+              >
+                <FiCheckCircle
+                  className="mt-0.5 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400"
+                  aria-hidden="true"
+                />
+
+                <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  {feature}
+                </p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        {/* Decisiones técnicas */}
+        <article
+          id="project-decisions"
+          className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+            Decisiones técnicas
+          </p>
+
+          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+            Criterios aplicados durante el desarrollo
+          </h2>
+
+          <div className="mt-5 grid gap-3">
+            {project.technicalDecisions.map((decision) => (
+              <div
+                key={decision}
+                className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-900"
+              >
+                <p className="text-sm leading-7 text-slate-600 dark:text-slate-300">
+                  {decision}
+                </p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        {/* Resultado */}
+        <article
+          id="project-result"
+          className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+            Resultado
+          </p>
+
+          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+            Resultado alcanzado
+          </h2>
+
+          <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+            {project.result}
+          </p>
+        </article>
+
+        {/* Enlaces del proyecto */}
+        <article
+          id="project-links"
+          className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+            Enlaces del proyecto
+          </p>
+
+          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
+            Demo y repositorio
+          </h2>
+
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-slate-600 dark:text-slate-300">
+            Los enlaces públicos estarán disponibles después de publicar el proyecto
+            en GitHub y realizar el despliegue final en Vercel.
+          </p>
+
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             {project.demoUrl ? (
               <a
                 href={project.demoUrl}
@@ -197,107 +377,6 @@ function ProjectDetail() {
               </span>
             )}
           </div>
-        </div>
-
-        {/* Contenido técnico del proyecto */}
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          {/* Resumen */}
-          <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-              Resumen
-            </p>
-
-            <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
-              Descripción del proyecto
-            </h2>
-
-            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
-              {project.summary}
-            </p>
-          </article>
-
-          {/* Objetivo */}
-          <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-              Objetivo
-            </p>
-
-            <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
-              Propósito del desarrollo
-            </h2>
-
-            <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
-              {project.objective}
-            </p>
-          </article>
-        </div>
-
-        {/* Características principales */}
-        <article className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-            Características principales
-          </p>
-
-          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
-            Funcionalidades y elementos desarrollados
-          </h2>
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {project.features.map((feature) => (
-              <div
-                key={feature}
-                className="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-900"
-              >
-                <FiCheckCircle
-                  className="mt-0.5 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400"
-                  aria-hidden="true"
-                />
-
-                <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
-                  {feature}
-                </p>
-              </div>
-            ))}
-          </div>
-        </article>
-
-        {/* Decisiones técnicas */}
-        <article className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-            Decisiones técnicas
-          </p>
-
-          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
-            Criterios aplicados durante el desarrollo
-          </h2>
-
-          <div className="mt-5 grid gap-3">
-            {project.technicalDecisions.map((decision) => (
-              <div
-                key={decision}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-slate-900"
-              >
-                <p className="text-sm leading-7 text-slate-600 dark:text-slate-300">
-                  {decision}
-                </p>
-              </div>
-            ))}
-          </div>
-        </article>
-
-        {/* Resultado */}
-        <article className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 transition-colors sm:p-6 dark:border-white/10 dark:bg-white/3 dark:shadow-black/20">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-            Resultado
-          </p>
-
-          <h2 className="mt-3 text-xl font-semibold text-slate-950 dark:text-white">
-            Resultado alcanzado
-          </h2>
-
-          <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
-            {project.result}
-          </p>
         </article>
 
         {/* Acción de regreso */}
